@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mumbai Indians 2025 | Official Team Website</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide-react@0.294.0/dist/lucide-react.js"></script>
+    <script src="https://unpkg.com/lucide-icons"></script>
+
+    <style>
+      /* --- Custom CSS Starts Here --- */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #001a41;
+        color: #ffffff;
+      }
+      .mi-blue {
+        background-color: #004b8d;
+      }
+      .mi-gold {
+        color: #d1b000;
+      }
+      .btn-gold {
+        background-color: #d1b000;
+        color: #001a41;
+        transition: all 0.3s ease;
+      }
+      .btn-gold:hover {
+        background-color: #eacd3a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(234, 205, 58, 0.3);
+      }
+      .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+      .nav-link:hover {
+        color: #d1b000;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #d1b000;
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+      .card-bg {
+        background-color: rgba(0, 75, 141, 0.5);
+        border: 1px solid rgba(209, 176, 0, 0.2);
+        backdrop-filter: blur(10px);
+      }
+      .section-title {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #001a41;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #004b8d;
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #d1b000;
+      }
+
+      /* Player Card Styles */
+      .player-card {
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .player-card:hover {
+        transform: translateY(-5px);
+      }
+      .player-card.active {
+        box-shadow: 0 0 15px 5px rgba(209, 176, 0, 0.6);
+        border: 2px solid #d1b000;
+        transform: translateY(-5px);
+      }
+      .category-title {
+        font-size: 1.875rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #004b8d;
+        text-align: left;
+      }
+      /* Added for smooth animation on details pane */
+      .player-details-wrapper {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.7s ease-in-out;
+      }
+      .player-details-wrapper.show {
+        max-height: 1000px; /* Large enough to fit content */
+      }
+      /* --- Custom CSS Ends Here --- */
+    </style>
+  </head>
+  <body class="antialiased">
+    <!-- Header -->
+    <header class="mi-blue sticky top-0 z-50 shadow-lg">
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <img
+          src="photos/mi_logo.png"
+          alt="Mumbai Indians Logo"
+          class="h-10"
+        />
+        <ul class="hidden md:flex items-center space-x-8">
+          <li><a href="#home" class="nav-link font-semibold">Home</a></li>
+          <li><a href="#team" class="nav-link font-semibold">Team</a></li>
+          <li>
+            <a href="#schedule" class="nav-link font-semibold">Schedule</a>
+          </li>
+          <li><a href="#news" class="nav-link font-semibold">News</a></li>
+          <li>
+            <a href="#fan-zone" class="nav-link font-semibold">Fan Zone</a>
+          </li>
+        </ul>
+        <a
+          href="https://shop.mumbaiindians.com/"
+          class="hidden md:inline-block btn-gold font-bold py-2 px-6 rounded-full uppercase tracking-wider"
+          >Shop</a
+        >
+        <button id="mobile-menu-button" class="md:hidden">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </nav>
+      <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+        <ul class="flex flex-col space-y-4">
+          <li><a href="#home" class="block py-2">Home</a></li>
+          <li><a href="#team" class="block py-2">Team</a></li>
+          <li><a href="#schedule" class="block py-2">Schedule</a></li>
+          <li><a href="#news" class="block py-2">News</a></li>
+          <li><a href="#fan-zone" class="block py-2">Fan Zone</a></li>
+          <li>
+            <a
+              href="#"
+              class="btn-gold font-bold py-2 px-6 rounded-full uppercase tracking-wider text-center mt-2"
+              >Shop</a
+            >
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section
+        id="home"
+        class="h-[70vh] md:h-[90vh] bg-cover bg-center bg-no-repeat"
+        style="
+          background-image: url('photos/mi_Team.png');
+        "
+      ></section>
+
+      <!-- Match Schedule Section -->
+      <section id="schedule" class="py-16 md:py-24">
+        <div class="container mx-auto px-6">
+          <h2
+            class="section-title text-3xl md:text-4xl font-extrabold text-center mi-gold tracking-wide mb-12"
+          >
+            Next Match
+          </h2>
+          <div
+            class="card-bg max-w-4xl mx-auto rounded-2xl p-6 md:p-10 shadow-2xl"
+          >
+            <div
+              class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0"
+            >
+              <div class="flex flex-col items-center">
+                <img
+                  src="photos/mumbai-indians-seeklogo.png"
+                  alt="Mumbai Indians"
+                  class="h-24 w-22 rounded-full"
+                />
+                <h3 class="text-2xl font-bold mt-4">Mumbai Indians</h3>
+              </div>
+              <div class="text-center">
+                <p class="text-xl font-semibold mi-gold">IPL 2025</p>
+                <h4 class="text-5xl font-black my-2">VS</h4>
+                <div
+                  id="countdown"
+                  class="flex justify-center space-x-2 md:space-x-4 mt-4 text-lg"
+                >
+                  <div class="text-center bg-gray-800/50 p-2 rounded-md">
+                    <span id="days" class="text-2xl font-bold">00</span
+                    ><br />Days
+                  </div>
+                  <div class="text-center bg-gray-800/50 p-2 rounded-md">
+                    <span id="hours" class="text-2xl font-bold">00</span
+                    ><br />Hours
+                  </div>
+                  <div class="text-center bg-gray-800/50 p-2 rounded-md">
+                    <span id="minutes" class="text-2xl font-bold">00</span
+                    ><br />Minute
+                  </div>
+                  <div class="text-center bg-gray-800/50 p-2 rounded-md">
+                    <span id="seconds" class="text-2xl font-bold">00</span
+                    ><br />Second
+                  </div>
+                </div>
+                <p class="mt-4 text-gray-300">Wankhede Stadium, Mumbai</p>
+              </div>
+              <div class="flex flex-col items-center">
+                <img
+                  src="photos/Chennai_Super_Kings_Logo.svg"
+                  alt="Opponent"
+                  class="h-24 w-24 rounded-full"
+                />
+                <h3 class="text-2xl font-bold mt-4">Chennai Super Kings</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Player Profiles Section -->
+      <section id="team" class="py-16 md:py-24 bg-black bg-opacity-20">
+        <div class="container mx-auto px-6">
+          <h2
+            class="section-title text-3xl md:text-4xl font-extrabold text-center mi-gold tracking-wide mb-12"
+          >
+            Team Player
+          </h2>
+          <div id="player-grid-container"></div>
+        </div>
+      </section>
+
+      <!-- Latest News Section UPDATED -->
+       <section id="news" class="py-16 md:py-24">
+        <div class="container mx-auto px-6">
+          <h2 class="section-title text-3xl md:text-4xl font-extrabold text-center uppercase mi-gold tracking-wide mb-12">
+            Latest News
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- News Card 1 -->
+            <a href="https://www.iplt20.com/video/61416/ipl-2025-m38-mi-vs-csk---match-highlights" target="_blank" class="block card-bg rounded-lg overflow-hidden group relative">
+                <img src="photos/Highlight.png" alt="News Image 1" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105"/>
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center transition-all duration-300">
+                    <i data-lucide="play-circle" class="w-20 h-20 text-white opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300"></i>
+                </div>
+                <div class="p-6">
+                    <p class="text-sm mi-gold">Match Report</p>
+                    <h3 class="text-xl font-bold mt-2 mb-4 group-hover:text-yellow-400">
+                        Mumbai Indians Won by 9 Wickets in Wankhede.
+                    </h3>
+                    <span class="font-semibold group-hover:text-yellow-400">Watch Now &rarr;</span>
+                </div>
+            </a>
+
+            <!-- News Card 2 -->
+             <a href="https://www.iplt20.com/video/61441/ipl-2025-m38-mi-vs-csk---suryakumar-yadav-interview" target="_blank" class="block card-bg rounded-lg overflow-hidden group relative">
+                <img src="photos/SKY_interview.png" alt="News Image 2" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105"/>
+                 <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center transition-all duration-300">
+                    <i data-lucide="play-circle" class="w-20 h-20 text-white opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300"></i>
+                </div>
+                <div class="p-6">
+                    <p class="text-sm mi-gold">Interview</p>
+                    <h3 class="text-xl font-bold mt-2 mb-4 group-hover:text-yellow-400">
+                        "Suryakumar Yadav Interview"
+                    </h3>
+                    <span class="font-semibold group-hover:text-yellow-400">Watch Now &rarr;</span>
+                </div>
+            </a>
+
+            <!-- News Card 3 -->
+            <a href="https://www.mumbaiindians.com/videos/mi-daily-2025-may-20-mumbai-indians-cricket" target="_blank" class="block card-bg rounded-lg overflow-hidden group relative">
+                <img src="photos/training.png" alt="News Image 3" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105"/>
+                 <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center transition-all duration-300">
+                    <i data-lucide="play-circle" class="w-20 h-20 text-white opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300"></i>
+                </div>
+                <div class="p-6">
+                    <p class="text-sm mi-gold">Behind the Scenes</p>
+                    <h3 class="text-xl font-bold mt-2 mb-4 group-hover:text-yellow-400">
+                        Final training session at home this season!
+                    </h3>
+                    <span class="font-semibold group-hover:text-yellow-400">Watch Now &rarr;</span>
+                </div>
+            </a>
+
+          </div>
+        </div>
+      </section>
+      <section id="fan-zone" class="py-16 md:py-24 bg-black bg-opacity-20">
+        <div class="container mx-auto px-6">
+          <h2
+            class="section-title text-3xl md:text-4xl font-extrabold text-center uppercase mi-gold tracking-wide mb-12"
+          >
+            Fan Zone
+          </h2>
+          <div
+            id="poll-container"
+            class="card-bg max-w-2xl mx-auto rounded-2xl p-8 shadow-2xl text-center"
+          >
+            <h3 class="text-2xl font-bold mb-6">
+              Who will be the top scorer of the next match?
+            </h3>
+            <form id="fan-poll">
+              <div class="space-y-4 text-left max-w-sm mx-auto">
+                <label
+                  class="flex items-center p-4 rounded-lg bg-blue-900/50 border border-transparent hover:border-yellow-400 cursor-pointer"
+                  ><input
+                    type="radio"
+                    name="top_scorer"
+                    value="rohit"
+                    class="form-radio h-5 w-5 text-yellow-500 bg-gray-800 border-gray-600 focus:ring-yellow-600"
+                  /><span class="ml-4 text-lg">Rohit Sharma</span></label
+                >
+                <label
+                  class="flex items-center p-4 rounded-lg bg-blue-900/50 border border-transparent hover:border-yellow-400 cursor-pointer"
+                  ><input
+                    type="radio"
+                    name="top_scorer"
+                    value="suryakumar"
+                    class="form-radio h-5 w-5 text-yellow-500 bg-gray-800 border-gray-600 focus:ring-yellow-600"
+                  /><span class="ml-4 text-lg">Suryakumar Yadav</span></label
+                >
+                <label
+                  class="flex items-center p-4 rounded-lg bg-blue-900/50 border border-transparent hover:border-yellow-400 cursor-pointer"
+                  ><input
+                    type="radio"
+                    name="top_scorer"
+                    value="hardik"
+                    class="form-radio h-5 w-5 text-yellow-500 bg-gray-800 border-gray-600 focus:ring-yellow-600"
+                  /><span class="ml-4 text-lg">Hardik Pandya</span></label
+                >
+              </div>
+              <button
+                type="submit"
+                class="mt-8 btn-gold font-bold py-3 px-10 rounded-full uppercase tracking-wider text-lg"
+              >
+                Vote
+              </button>
+            </form>
+            <div
+              id="poll-result"
+              class="hidden text-2xl font-bold mi-gold mt-6"
+            >
+              Thank you for your vote!
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mi-blue py-12">
+      <div class="container mx-auto px-6 text-center">
+        <div class="flex justify-center mb-6 space-x-6">
+          <a href="#" class="hover:text-yellow-400"
+            ><i data-lucide="facebook" class="w-7 h-7"></i
+          ></a>
+          <a href="#" class="hover:text-yellow-400"
+            ><i data-lucide="twitter" class="w-7 h-7"></i
+          ></a>
+          <a href="#" class="hover:text-yellow-400"
+            ><i data-lucide="instagram" class="w-7 h-7"></i
+          ></a>
+          <a href="#" class="hover:text-yellow-400"
+            ><i data-lucide="youtube" class="w-7 h-7"></i
+          ></a>
+        </div>
+        <div class="flex justify-center space-x-6 mb-6 text-gray-300">
+          <a href="privacy.html" class="hover:text-white">Privacy Policy</a><span>|</span>
+          <a href="terms.html" class="hover:text-white">Terms of Use</a><span>|</span>
+          <a href="contact.html" class="hover:text-white">Contact Us</a>
+        </div>
+        <p>&copy; 2025 Mumbai Indians. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // --- Custom JavaScript Starts Here ---
+      document.addEventListener("DOMContentLoaded", function () {
+        try {
+          if (typeof lucide !== "undefined") {
+            lucide.createIcons();
+          }
+        } catch (e) {
+          console.error(e);
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        if (mobileMenuButton)
+          mobileMenuButton.addEventListener("click", () =>
+            mobileMenu.classList.toggle("hidden")
+          );
+
+        // Countdown Timer
+        const countdownEl = document.getElementById("countdown");
+        if (countdownEl) {
+          const countdownDate = new Date("April 5, 2025 20:00:00").getTime();
+          const interval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            if (distance < 0) {
+              clearInterval(interval);
+              countdownEl.innerHTML =
+                "<div class='text-2xl font-bold'>Match Started!</div>";
+              return;
+            }
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor(
+              (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("days").innerText = String(d).padStart(
+              2,
+              "0"
+            );
+            document.getElementById("hours").innerText = String(h).padStart(
+              2,
+              "0"
+            );
+            document.getElementById("minutes").innerText = String(m).padStart(
+              2,
+              "0"
+            );
+            document.getElementById("seconds").innerText = String(s).padStart(
+              2,
+              "0"
+            );
+          }, 1000);
+        }
+
+        // Fan Poll
+        const fanPoll = document.getElementById("fan-poll");
+        if (fanPoll)
+          fanPoll.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (document.querySelector('input[name="top_scorer"]:checked')) {
+              fanPoll.classList.add("hidden");
+              document.getElementById("poll-result").classList.remove("hidden");
+            }
+          });
+
+        // --- Team Member - Interactive Player Section ---
+        const teamData = {
+          Batters: [
+            {
+              id: 1,
+              name: "Rohit Sharma",
+              role: "Batter",
+              imageUrl:
+                "photos/Players/rohit.png",
+              stats: {
+                matches: 257,
+                runs: 6628,
+                wickets: 15,
+                avg: 29.59,
+                fifty: 42,
+                hundred: 2,
+              },
+            },
+            {
+              id: 2,
+              name: "Suryakumar Yadav",
+              role: "Batter",
+              imageUrl:
+                "photos/Players/surya.png",
+              stats: {
+                matches: 153,
+                runs: 3573,
+                wickets: 0,
+                avg: 31.62,
+                fifty: 24,
+                hundred: 1,
+              },
+            },
+            {
+              id: 3,
+              name: "Robin Minz",
+              role: "WK-Batter",
+              imageUrl:
+                "photos/Players/Robin.png",
+              stats: {
+                matches: 0,
+                runs: 0,
+                wickets: 0,
+                avg: 0,
+                fifty: 0,
+                hundred: 0,
+              },
+            },
+            {
+              id: 4,
+              name: "Shruith Krishnan",
+              role: "WK-Batter",
+              imageUrl:
+                "photos/Players/Shrijith.png",
+              stats: {
+                matches: 0,
+                runs: 0,
+                wickets: 0,
+                avg: 0,
+                fifty: 0,
+                hundred: 0,
+              },
+            },
+            {
+              id: 5,
+              name: "Bevon Jacobs",
+              role: "Batter",
+              imageUrl:
+                "photos/Players/Bevon.png",
+              stats: {
+                matches: 0,
+                runs: 0,
+                wickets: 0,
+                avg: 0,
+                fifty: 0,
+                hundred: 0,
+              },
+            },
+            {
+              id: 6,
+              name: "Jonny Bairstow",
+              role: "WK-Batter",
+              imageUrl:
+                "photos/Players/Jonny.png",
+              stats: {
+                matches: 49,
+                runs: 1478,
+                wickets: 0,
+                avg: 31.45,
+                fifty: 9,
+                hundred: 1,
+              },
+            },
+            {
+              id: 7,
+              name: "N. Tilak Varma",
+              role: "Batter",
+              imageUrl:
+                "photos/Players/Tilak.png",
+              stats: {
+                matches: 41,
+                runs: 855,
+                wickets: 0,
+                avg: 37.17,
+                fifty: 4,
+                hundred: 0,
+              },
+            },
+          ],
+          "All-Rounders": [
+            {
+              id: 8,
+              name: "Hardik Pandya",
+              role: "All-Rounder",
+              imageUrl:
+                "photos/Players/hardik.png",
+              stats: {
+                matches: 137,
+                runs: 2478,
+                wickets: 60,
+                avg: 29.86,
+                fifty: 10,
+                hundred: 0,
+              },
+            },
+            {
+              id: 9,
+              name: "Naman Dhir",
+              role: "All-Rounder",
+              imageUrl:
+                "photos/Players/Naman.png",
+              stats: {
+                matches: 11,
+                runs: 68,
+                wickets: 0,
+                avg: 13.6,
+                fifty: 0,
+                hundred: 0,
+              },
+            },
+            {
+              id: 10,
+              name: "Mitchell Santner",
+              role: "All-Rounder",
+              imageUrl:
+                "photos/Players/Mitchell.png",
+              stats: {
+                matches: 20,
+                runs: 93,
+                wickets: 16,
+                avg: 18.6,
+                fifty: 0,
+                hundred: 0,
+              },
+            },
+            {
+              id: 11,
+              name: "Raj Angad Bawa",
+              role: "All-Rounder",
+              imageUrl:
+                "photos/Players/Raj_Angad.png",
+              stats: {
+                matches: 2,
+                runs: 11,
+                wickets: 0,
+                avg: 5.5,
+                fifty: 0,
+                hundred: 0,
+              },
+            },
+          ],
+          Bowlers: [
+            {
+              id: 12,
+              name: "Jasprit Bumrah",
+              role: "Bowler",
+              imageUrl:
+                "photos/Players/Jasprit.png",
+              stats: {
+                matches: 133,
+                runs: 70,
+                wickets: 165,
+                avg: 22.56,
+                fifty: 0,
+                hundred: 0,
+              },
+            },
+            {
+              id: 13,
+              name: "Trent Boult",
+              role: "Bowler",
+              imageUrl:
+                "photos/Players/trent_boult.png",
+              stats: {
+                matches: 99,
+                runs: 101,
+                wickets: 116,
+                avg: 25.81,
+                fifty: 0,
+                hundred: 0,
+              },
+            },
+            {
+              id: 14,
+              name: "Karn Sharma",
+              role: "Bowler",
+              imageUrl:
+                "photos/Players/Karn.png",
+              stats: {
+                matches: 84,
+                runs: 421,
+                wickets: 75,
+                avg: 27.64,
+                fifty: 0,
+                hundred: 0,
+              },
+            },
+            {
+              id: 15,
+              name: "Deepak Chahar",
+              role: "Bowler",
+              imageUrl:
+                "photos/Players/Deepak.png",
+              stats: {
+                matches: 81,
+                runs: 109,
+                wickets: 79,
+                avg: 28.9,
+                fifty: 0,
+                hundred: 0,
+              },
+            },
+            {
+              id: 16,
+              name: "Reece Topley",
+              role: "Bowler",
+              imageUrl:
+                "photos/Players/Reece.png",
+              stats: {
+                matches: 10,
+                runs: 22,
+                wickets: 8,
+                avg: 34.25,
+                fifty: 0,
+                hundred: 0,
+              },
+            },
+          ],
+        };
+
+        const playerGridContainer = document.getElementById(
+          "player-grid-container"
+        );
+        let activeDetailsElement = null;
+
+        function displayPlayerCards() {
+          if (!playerGridContainer) return;
+          playerGridContainer.innerHTML = "";
+          for (const category in teamData) {
+            const categoryTitle = document.createElement("h3");
+            categoryTitle.className = "category-title";
+            categoryTitle.textContent = category;
+            playerGridContainer.appendChild(categoryTitle);
+
+            const grid = document.createElement("div");
+            grid.className =
+              "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8";
+            teamData[category].forEach((player) => {
+              const playerCard = document.createElement("div");
+              playerCard.className = "group text-center player-card rounded-xl";
+              playerCard.dataset.playerId = player.id;
+              playerCard.innerHTML = `<div class="relative"><img src="${player.imageUrl}" alt="${player.name}" class="rounded-xl w-full h-auto"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent rounded-xl"></div><div class="absolute bottom-4 left-4 text-left"><p class="text-lg font-bold">${player.name}</p><p class="text-sm mi-gold font-semibold">${player.role}</p></div></div>`;
+              grid.appendChild(playerCard);
+            });
+            playerGridContainer.appendChild(grid);
+          }
+        }
+
+        function createAndShowPlayerDetails(playerId, anchorElement) {
+          const player = Object.values(teamData)
+            .flat()
+            .find((p) => p.id === parseInt(playerId));
+          if (!player || !anchorElement) return null;
+
+          const detailsWrapper = document.createElement("div");
+          detailsWrapper.className = "player-details-wrapper w-full mt-8";
+          detailsWrapper.innerHTML = `
+                <div class="card-bg rounded-2xl p-6 md:p-10 shadow-2xl flex flex-col md:flex-row items-center gap-8 relative">
+                    <button id="close-details" class="absolute top-2 right-4 text-4xl font-bold hover:text-yellow-400 transition-colors">&times;</button>
+                    <img src="${player.imageUrl}" alt="${player.name}" class="w-48 h-auto rounded-lg shadow-lg">
+                    <div class="text-center md:text-left flex-1">
+                        <h3 class="text-4xl font-extrabold mi-gold">${player.name}</h3>
+                        <p class="text-xl font-semibold mt-1">${player.role}</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6 text-lg">
+                            <div class="bg-blue-900/50 p-3 rounded-lg"><p class="font-bold text-2xl">${player.stats.matches}</p><p class="text-gray-300">Matches</p></div>
+                            <div class="bg-blue-900/50 p-3 rounded-lg"><p class="font-bold text-2xl">${player.stats.runs}</p><p class="text-gray-300">Runs</p></div>
+                            <div class="bg-blue-900/50 p-3 rounded-lg"><p class="font-bold text-2xl">${player.stats.wickets}</p><p class="text-gray-300">Wickets</p></div>
+                            <div class="bg-blue-900/50 p-3 rounded-lg"><p class="font-bold text-2xl">${player.stats.fifty}</p><p class="text-gray-300">50s</p></div>
+                            <div class="bg-blue-900/50 p-3 rounded-lg"><p class="font-bold text-2xl">${player.stats.hundred}</p><p class="text-gray-300">100s</p></div>
+                            <div class="bg-blue-900/50 p-3 rounded-lg"><p class="font-bold text-2xl">${player.stats.avg}</p><p class="text-gray-300">Average</p></div>
+                        </div>
+                    </div>
+                </div>`;
+
+          anchorElement.after(detailsWrapper);
+
+          // Trigger the animation
+          setTimeout(() => {
+            detailsWrapper.classList.add("show");
+          }, 10);
+
+          detailsWrapper
+            .querySelector("#close-details")
+            .addEventListener("click", () => {
+              detailsWrapper.classList.remove("show");
+              setTimeout(() => detailsWrapper.remove(), 700); // Wait for animation to finish
+              document
+                .querySelector(".player-card.active")
+                ?.classList.remove("active");
+              activeDetailsElement = null;
+            });
+
+          return detailsWrapper;
+        }
+
+        if (playerGridContainer) {
+          playerGridContainer.addEventListener("click", (e) => {
+            const card = e.target.closest(".player-card");
+            if (!card) return;
+
+            const playerId = card.dataset.playerId;
+            const currentlyActiveCard = document.querySelector(
+              ".player-card.active"
+            );
+
+            if (activeDetailsElement) {
+              activeDetailsElement.querySelector("#close-details").click();
+            }
+
+            if (currentlyActiveCard !== card) {
+              card.classList.add("active");
+              const playerRow = card.closest(".grid");
+              activeDetailsElement = createAndShowPlayerDetails(
+                playerId,
+                playerRow
+              );
+              if (activeDetailsElement) {
+                setTimeout(
+                  () =>
+                    activeDetailsElement.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                    }),
+                  100
+                );
+              }
+            }
+          });
+        }
+
+        displayPlayerCards();
+      });
+      // --- Custom JavaScript Ends Here ---
+    </script>
+  </body>
+</html>
