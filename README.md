@@ -1,12 +1,12 @@
-Mumbai Indians 2025 - Fan Hub Website
+# Mumbai Indians 2025 - Fan Hub Website
+
 An interactive and responsive fan website dedicated to the Mumbai Indians IPL team for the 2025 season. This project was developed as part of the ShadowFox Internship Program. It's designed to be a one-stop destination for fans, providing team information, schedules, news, and interactive content.
 
 Live Demo Link: View Live Website
 (Note: Replace the link with your actual GitHub Pages URL after deployment.)
 
-(Tip: Replace 'https://www.google.com/search?q=photos/mi_Team.png' with a good screenshot of your finished website for a better impression.)
+# Features
 
-✨ Features
 This website is packed with features to create an engaging experience for fans:
 
 Fully Responsive Design: Looks great on all devices, from mobile phones to desktops.
@@ -27,7 +27,7 @@ Functional Contact Page: A dedicated page with a form for users to send messages
 
 Modern UI/UX: Built with a clean and modern design inspired by the Mumbai Indians' official branding.
 
-🛠️ Technology Stack
+# Technology Stack
 This project was built using fundamental web technologies, making it lightweight and fast.
 
 HTML5: For the basic structure and content of the website.
@@ -41,6 +41,7 @@ Vanilla JavaScript: For all the interactive features like the countdown, player 
 Lucide Icons: For clean and modern icons used throughout the site.
 
 📂 Project Structure
+
 The project is organized into the following files and directories:
 
 /
@@ -54,7 +55,8 @@ The project is organized into the following files and directories:
 ├── terms.html       (Terms of Use page)
 └── README.md        (You are here!)
 
-🚀 How to Run Locally
+# How to Run Locally
+
 To run this project on your local machine, follow these simple steps:
 
 Clone the repository:
